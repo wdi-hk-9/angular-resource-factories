@@ -1,20 +1,20 @@
 var seeder = require('mongoose-seed');
 
-// Connect to MongoDB via Mongoose 
+// Connect to MongoDB via Mongoose
 seeder.connect('mongodb://localhost:27017/may-the-force', function() {
-  // Load Mongoose models 
+  // Load Mongoose models
   seeder.loadModels(['./models/Character.js']);
   seeder.loadModels(['./models/Episode.js']);
-  // Clear specified collections 
+  // Clear specified collections
   seeder.clearModels(['Character', 'Episode'], function() {
-    // Callback to populate DB once collections have been cleared 
+    // Callback to populate DB once collections have been cleared
     seeder.populateModels(data);
   });
 });
 
-// Data array containing seed data - documents organized by Model 
+// Data array containing seed data - documents organized by Model
 var data = [
-  { 
+  {
     'model': 'Character',
     'documents': [
       {
@@ -122,4 +122,4 @@ var data = [
       },
     ]
   }
-];  
+];

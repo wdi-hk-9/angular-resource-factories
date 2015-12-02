@@ -1,0 +1,33 @@
+<!-- Episodes -->
+<article ng-controller="EpisodeController as show">
+
+  <h2 ng-show="show.selectedEpisode">
+    {{ show.selectedEpisode.name }} ||
+    {{ show.selectedEpisode.release_date }} ||
+    {{ show.selectedEpisode.director }} in {{ show.selectedEpisode.studio }}
+  </h2>
+
+  <form ng-submit="show.addEpisode()">
+    <label>Name</label>
+    <input type="text" name="name" ng-model="show.episode.name">
+    <br>
+    <label>Release Date</label>
+    <input type="text" name="lightsaber" ng-model="show.episode.release_date">
+    <br>
+    <label>Director</label>
+    <input type="text" name="lightsaber" ng-model="show.episode.director">
+    <br>
+    <label>Studio</label>
+    <input type="text" name="lightsaber" ng-model="show.episode.studio">
+    <input type="submit" value="Add">
+  </form>
+
+  <h1>The Episode Database</h1>
+  <ul>
+    <li ng-repeat="episode in show.episodes" ng-click="show.selectEpisode(episode)">
+      {{ episode.name }} || {{ episode.release_date }} || {{ episode.director }} in {{ episode.studio }}
+      <a href="#" ng-click="show.editEpisode(episode)">Edit</a>
+      <button ng-click="show.deleteEpisode(episode)">Delete</button>
+    </li>
+  </ul>
+</article>
