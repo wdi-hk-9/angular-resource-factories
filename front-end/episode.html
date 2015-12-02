@@ -1,0 +1,26 @@
+<main ng-controller="EpisodeController as main">
+<!--   <h2 ng-show="main.selectedEpisode">{{ main.selectedEpisode.name }} <span class="{{ main.selectedEpisode.director | lowercase }}">{{ main.selectedEpisode.studio }}</span> </h2> -->
+
+  <form name="main.newEpisode" ng-submit="main.addEpisode()">
+    <label>Name</label>
+    <input type="text" name="name" ng-model="main.episode.name">
+    <label>Release Date</label>
+    <input type="text" name="release_date" ng-model="main.episode.release_date">
+    <label>Director</label>
+    <input type="text" name="director" ng-model="main.episode.director">
+    <label>Studio</label>
+    <input type="text" name="studio" ng-model="main.episode.studio">
+    <input type="submit" value="Add">
+  </form>
+
+  <h1>The Episode Database</h1>
+  <ul>
+    <li ng-repeat="episode in main.episodes" ng-click="main.selectEpisode(episode)">{{ episode.name }}
+      <span class="{{ episode.release_date }}">{{ episode.release_date }}</span>
+      <span class="{{ episode.director }}">{{ episode.director }}</span>
+      <span class="{{ episode.studio }}">{{ episode.studio }}</span>
+      <a href="#" ng-click="main.editEpisode(episode)">Edit</a>
+      <button ng-click="main.deleteEpisode(episode)">Delete</button>
+    </li>
+  </ul>
+</main>
