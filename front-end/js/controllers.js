@@ -1,13 +1,18 @@
 angular
-  .module("lightsaberApp")
+  // Add ngResource as a dependency
+  .module("lightsaberApp", ['ngResource'])
   .controller("MainController", MainController);
 
-MainController.$inject = ['$resource']
-function MainController($resource){
+// Inject our factory so our controller can use it
+MainController.$inject = ['$resource', 'Character']
+
+function MainController($resource, Character){
   var self = this;
 
   // Blank new character for form
-  this.character = {}
+  self.character = {};
+
+  self.test = Character;
 
   // Obtain our resource class
   var Character = $resource('http://localhost:3000/characters/:id', {id: '@_id'}, {
@@ -15,15 +20,15 @@ function MainController($resource){
   });
 
   // Fetch all todos
-  this.characters = Character.query();
+  self.characters = Character.query();
 
   // Fetch the clicked todo
-  this.selectCharacter = function(character) {
+  self.selectCharacter = function(character) {
     self.selectedCharacter = Character.get({id: character._id});
   };
 
   // Save as a Constructor
-  // this.addCharacter = function() {
+  // self.addCharacter = function() {
   //   var character = new Character(self.character);
   //   character.$save(function(){
   //     self.characters.push(character);
@@ -32,7 +37,7 @@ function MainController($resource){
   // };
 
   // Create/Update a Character (Class Method)
-  this.addCharacter = function() {
+  self.addCharacter = function() {
     if (self.character._id) {
       Character.update(self.character, function(){
         self.character = {};
@@ -46,14 +51,14 @@ function MainController($resource){
   };
 
   // Delete a Character
-  this.deleteCharacter = function(character){
+  self.deleteCharacter = function(character){
     Character.delete({id: character._id});
     var index = self.characters.indexOf(character);
     self.characters.splice(index, 1);
   }
 
   // Fill the form to edit a Character
-  this.editCharacter = function(character){
+  self.editCharacter = function(character){
     self.character = character;
   }
 }
