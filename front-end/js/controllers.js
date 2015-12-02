@@ -1,23 +1,58 @@
 angular
   .module("lightsaberApp")
-  .controller("MainController", MainController);
+  .controller("MainController", MainController)
+  .controller("EpisodeController", EpisodeController);
 
-MainController.$inject = ['$resource']
-function MainController($resource){
+EpisodeController.$inject = ['Episode']
+function EpisodeController(Episode) {
   var self = this;
 
+  this.episode = {}
+
+  var Episode = Episode;
+
+  this.episodes = Episode.query();
+
+  this.selectEpisode = function(episode) {
+    self.selectedEpisode = Episode.get({id: episode._id});
+  };
+
+  this.addEpisode = function() {
+    if (self.episode._id) {
+      Episode.update(self.episode, function(){
+        self.episode = {};
+      });
+    } else {
+      Episode.save(self.episode, function(episode) {
+        self.episodes.push(episode);
+        self.episode = {}
+      });
+    }
+  };
+
+  this.deleteEpisode = function(episode){
+    Episode.delete({id: episode._id});
+    var index = self.episodes.indexOf(episode);
+    self.episodes.splice(index, 1);
+  }
+
+  // Fill the form to edit a Character
+  this.editEpisode = function(episode){
+    self.episode = episode;
+  }
+}
+
+MainController.$inject = ['Character']
+function MainController(Character){
+  var self = this;
   // Blank new character for form
   this.character = {}
-
   // Obtain our resource class
-  var Character = $resource('http://localhost:3000/characters/:id', {id: '@_id'}, {
-    'update': { method:'PUT' }
-  });
-
+  var Character = Character;
   // Fetch all todos
   this.characters = Character.query();
 
-  // Fetch the clicked todo
+  // Fetch the clicked character
   this.selectCharacter = function(character) {
     self.selectedCharacter = Character.get({id: character._id});
   };
@@ -45,7 +80,7 @@ function MainController($resource){
     }
   };
 
-  // Delete a Character
+  //s Delete a Character
   this.deleteCharacter = function(character){
     Character.delete({id: character._id});
     var index = self.characters.indexOf(character);
