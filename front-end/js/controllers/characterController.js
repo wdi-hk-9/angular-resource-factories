@@ -1,25 +1,25 @@
 angular
   .module("lightsaberApp")
-  .controller("MainController", MainController);
+  .controller("CharacterController", CharacterController);
 
-MainController.$inject = ['$resource']
-function MainController($resource){
+CharacterController.$inject = ['Character']
+function CharacterController(Character){
   var self = this;
 
   // Blank new character for form
   this.character = {}
 
-  // Obtain our resource class
-  var Character = $resource('http://localhost:3000/characters/:id', {id: '@_id'}, {
-    'update': { method:'PUT' }
-  });
+  this.ada = Character;
 
-  // Fetch all todos
+  // Obtain our resource class
+  var Character = Character;
+
+  // Fetch all characters
   this.characters = Character.query();
 
-  // Fetch the clicked todo
+  // Fetch the clicked character
   this.selectCharacter = function(character) {
-    self.selectedCharacter = Character.get({id: character._id});
+    self.selectedCharacter = Character.get({ id: character._id });
   };
 
   // Save as a Constructor

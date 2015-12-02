@@ -38,7 +38,9 @@ function updateEpisode(request, response) {
     if(error) response.status(404).send(error);
 
     if(request.body.name) episode.name = request.body.name;
-    if(request.body.lightsaber) episode.lightsaber = request.body.lightsaber;
+    if(request.body.release_date) episode.release_date = request.body.release_date;
+    if(request.body.director) episode.director = request.body.director;
+    if(request.body.studio) episode.studio = request.body.studio;
 
     episode.save(function(error) {
       if(error) response.status(500).send(error);
