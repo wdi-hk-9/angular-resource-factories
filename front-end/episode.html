@@ -1,0 +1,24 @@
+<section ng-controller="EpisodeController as epi">
+
+  <h1> New Episode</h1>
+  <form name="epi.newEpisode" ng-submit="epi.addEpisode()">
+  <label>Name</label>
+  <input type="text" name="name" ng-model="epi.episode.name">
+  <label>Release Date</label>
+  <input type="text" name="release_date" ng-model="epi.episode.release_date">
+  </br>
+  <label>Director</label>
+  <input type="text" name="director" ng-model="epi.episode.director">
+  <label>Studio</label>
+  <input type="text" name="studio" ng-model="epi.episode.studio">
+  </br>
+  <input type="submit" value="Add">
+  </form>
+
+  <h2>The Episode Database</h2>
+  <ul>
+  <li ng-repeat="n in epi.episodes" ng-click="epi.selectEpisode(n)">
+    {{ n.name }}'s director is {{ n.director }}</span> <a href="#" ng-click="epi.editEpisode(n)">Edit</a> <button ng-click="epi.deleteEpisode(n)">Delete</button>
+  </li>
+  </ul>
+</section>
