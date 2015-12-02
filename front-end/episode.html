@@ -1,0 +1,29 @@
+<main ng-controller="EpisodeController as main">
+
+<nav class='tabs'>
+  <a ui-sref-active="active" ui-sref="episode">Episodes</a>
+  <a ui-sref-active="active" ui-sref="character">Characters</a>
+</nav>
+
+  <h2 ng-show="main.selectedEpisode">{{ main.selectedEpisode.name }} released on {{ main.selectedEpisode.release_date }}, directed by {{ main.selectedEpisode.director }}, filmed in {{ main.selectedEpisode.studio }}</h2>
+
+  <form name="main.newEpisode" ng-submit="main.addEpisode()">
+    <label>Name</label>
+    <input type="text" name="name" ng-model="main.episode.name">
+    <label>Release Date</label>
+    <input type="text" name="release_date" ng-model="main.episode.release_date">
+    <label>Director</label>
+    <input type="text" name="director" ng-model="main.episode.director">
+    <label>Studio</label>
+    <input type="text" name="studio" ng-model="main.episode.studio">
+    <input type="submit" value="Add">
+  </form>
+
+  <h1>The Lightsaber Episode Database</h1>
+  <ul>
+    <li ng-repeat="episode in main.episodes" ng-click="main.selectEpisode(episode)">
+      {{ episode.name }}, released in {{ episode.release_date }}, directed by {{ episode.director }}, filmed at {{ episode.studio }}
+      <a href="#" ng-click="main.editEpisode(episode)">Edit</a> <button ng-click="main.deleteEpisode(episode)">Delete</button>
+    </li>
+  </ul>
+</main>
