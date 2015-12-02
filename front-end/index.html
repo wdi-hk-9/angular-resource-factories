@@ -12,7 +12,7 @@
 <body>
   <main ng-controller="MainController as main">
 
-    <h2 ng-show="main.selectedCharacter">{{ main.selectedCharacter.name }} weilds a <span class="{{ main.selectedCharacter.lightsaber | lowercase }}">{{ main.selectedCharacter.lightsaber }}</span> lightsaber</h2>
+    <h2 ng-show="main.selectedCharacter">{{ main.selectedCharacter.firstName }} weilds a <span class="{{ main.selectedCharacter.lightsaber | lowercase }}">{{ main.selectedCharacter.lightsaber }}</span> lightsaber</h2>
 
     <form name="main.newCharacter" ng-submit="main.addCharacter()">
       <label>Name</label>
