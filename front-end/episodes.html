@@ -1,0 +1,52 @@
+<nav>
+  <a ui-sref-active="active" ui-sref="characters">Characters</a>
+  <a ui-sref-active="active" ui-sref="episodes">Episodes</a>
+</nav>
+
+<main ng-controller="EpisodeController as epi">
+  <form ng-submit="epi.addEpisode()">
+    <div>
+      <label>Name</label>
+      <input type="text" name="name" ng-model="epi.episode.name">
+    </div>
+    <div>
+      <label>Release Date</label>
+      <input type="text" name="release_date" ng-model="epi.episode.release_date">
+    </div>
+    <div>
+      <label>Director</label>
+      <input type="text" name="director" ng-model="epi.episode.director">
+    </div>
+    <div>
+      <label>Studio</label>
+      <input type="text" name="studio" ng-model="epi.episode.studio">
+    </div>
+    <div>
+      <button type="submit">Add Episode</button>
+    </div>
+  </form>
+
+
+  <h1>The Episodes Database</h1>
+  <ul>
+    <li ng-repeat="episode in epi.episodes">
+      <strong>{{ episode.name }}</strong>
+      directed by {{ episode.director }}
+      <em>Release date: {{ episode.release_date }}</em> Produced by {{ episode.studio }}
+      <button ng-click="epi.deleteEpisode(episode)">Delete</button>
+      <a ng-click="epi.editEpisode(episode)">Edit</a>
+    </li>
+  </ul>
+
+
+
+</main>
+
+
+<!--       {
+        'name': 'Star Wars',
+        'release_date': 'May 25, 1977',
+        'director': 'George Lucas',
+        'studio': '20th Century Fox',
+      },
+ -->
