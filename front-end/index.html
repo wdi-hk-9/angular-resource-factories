@@ -12,9 +12,6 @@
 <body>
   <main ng-controller="MainController as main">
 
-    <!-- Testing our factory works -->
-    Test: {{ main.test.test }}
-
     <h2 ng-show="main.selectedCharacter">{{ main.selectedCharacter.name }} weilds a <span class="{{ main.selectedCharacter.lightsaber | lowercase }}">{{ main.selectedCharacter.lightsaber }}</span> lightsaber</h2>
 
     <form name="main.newCharacter" ng-submit="main.addCharacter()">

@@ -4,20 +4,15 @@ angular
   .controller("MainController", MainController);
 
 // Inject our factory so our controller can use it
-MainController.$inject = ['$resource', 'Character']
+MainController.$inject = ['Character']
 
-function MainController($resource, Character){
+function MainController(Character){
   var self = this;
 
   // Blank new character for form
   self.character = {};
 
   self.test = Character;
-
-  // Obtain our resource class
-  var Character = $resource('http://localhost:3000/characters/:id', {id: '@_id'}, {
-    'update': { method:'PUT' }
-  });
 
   // Fetch all todos
   self.characters = Character.query();
