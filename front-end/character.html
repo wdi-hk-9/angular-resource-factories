@@ -9,7 +9,8 @@
     <input type="text" name="name" ng-model="main.character.name">
     <label>Lightsaber</label>
     <input type="text" name="lightsaber" ng-model="main.character.lightsaber">
-    <input type="submit" value="Add">
+    <input ng-hide="main.character._id" type="submit" value="Add">
+    <input ng-show="main.character._id" type="submit" value="Edit">
   </form>
 
   <h1>The Lightsaber Database</h1>

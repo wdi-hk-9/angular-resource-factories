@@ -19,7 +19,8 @@
     <br>
     <label>Studio</label>
     <input type="text" name="lightsaber" ng-model="show.episode.studio">
-    <input type="submit" value="Add">
+    <input ng-hide="show.episode._id" type="submit" value="Add">
+    <input ng-show="show.episode._id" type="submit" value="Edit">
   </form>
 
   <h1>The Episode Database</h1>
