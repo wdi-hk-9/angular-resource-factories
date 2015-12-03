@@ -4,8 +4,8 @@ angular
   .controller("EpisodeController", EpisodeController)
 
 // EPISODE
-EpisodeController.$inject = ['Episode']
-function EpisodeController(Episode){
+EpisodeController.$inject = ['EpisodeResource']
+function EpisodeController(EpisodeResource){
 
   var self = this;
 
@@ -13,14 +13,13 @@ function EpisodeController(Episode){
   this.episode = {};
 
   // Obtain our resource class
-  var Episode = Episode;
+  var Episode = EpisodeResource;
 
   // Fetch all todos
   this.episodes = Episode.query();
 
   // Fetch the clicked todo
   this.selectEpisode = function(episode) {
-    console.log(episode)
     self.selectedEpisode = Episode.get({id: episode._id});
   };
 

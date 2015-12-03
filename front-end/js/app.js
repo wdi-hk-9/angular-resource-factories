@@ -8,7 +8,6 @@ function TheForceRouter($stateProvider, $urlRouterProvider) {
       url: '/',
       templateUrl: 'character.html'
     })
-  $stateProvider
     .state('episode', {
       url: '/episode',
       templateUrl: 'episode.html'
