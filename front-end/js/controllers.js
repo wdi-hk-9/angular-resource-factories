@@ -1,18 +1,67 @@
 angular
   .module("lightsaberApp")
-  .controller("MainController", MainController);
+  .controller("MainController", MainController)
+  .controller("EpisodeController", EpisodeController);
 
-MainController.$inject = ['$resource']
-function MainController($resource){
+// Epsiode Controller
+EpisodeController.$inject = ['Episode']
+function EpisodeController(Episode){
+  var self = this;
+
+  // Blank new character for form
+  this.episode = {}
+  self.editing = false;
+
+  // Obtain our resource class
+  var Episode = Episode;
+
+  // Fetch all todos
+  this.episodes = Episode.query();
+
+  // Fetch the clicked todo
+  this.selectedEpisode = function(episode) {
+    self.selectedEpisode = Episode.get({id: episode._id});
+  };
+
+  this.addEpisode = function() {
+    if (self.episode._id) {
+      Episode.update(self.episode, function(data){
+        self.episode = {};
+      });
+    } else {
+      Episode.save(self.episode, function(episode) {
+        self.episodes.push(episode);
+        self.episode = {}
+      });
+    }
+  };
+
+  // Delete a Episode
+  this.deleteEpisode = function(episode){
+    Episode.delete({id: episode._id});
+    var index = self.episodes.indexOf(episode);
+    self.episodes.splice(index, 1);
+  }
+
+  // Fill the form to edit a Episode
+  this.editEpisode = function(episode){
+    self.episode = episode;
+    self.editing = true;
+  }
+
+}
+
+
+// Character Controller
+MainController.$inject = [ 'Character']
+function MainController(Character){
   var self = this;
 
   // Blank new character for form
   this.character = {}
 
   // Obtain our resource class
-  var Character = $resource('http://localhost:3000/characters/:id', {id: '@_id'}, {
-    'update': { method:'PUT' }
-  });
+  var Character = Character;
 
   // Fetch all todos
   this.characters = Character.query();
